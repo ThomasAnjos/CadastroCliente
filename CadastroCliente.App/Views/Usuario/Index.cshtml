@@ -1,0 +1,61 @@
+﻿@model IEnumerable<CadastroCliente.App.Models.UsuarioDataAnnotations>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Usuários</h1>
+
+<p>
+    <a asp-action="UsuarioCriar">Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioSenha)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuarioNome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuarioEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuarioSenha)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-success">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
+                        <i class="bi bi-info-circle"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (ViewBag.MensagemDeErro != null)
+{
+    <br />
+    <div class="alert alert-danger">
+        @ViewBag.MensagemDeErro
+    </div>
+}
