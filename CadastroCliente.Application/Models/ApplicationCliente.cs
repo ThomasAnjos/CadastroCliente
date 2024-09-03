@@ -6,13 +6,13 @@ namespace CadastroCliente.Application.Models
     {
         public ApplicationCliente() { }
 
-        public ApplicationCliente(int Id, string ClienteNome, string ClienteEmail, string ClienteLogradouro, byte[] ClienteLogotipo)
+        public ApplicationCliente(int Id, string ClienteNome, string ClienteEmail, string ClienteLogradouro, IFormFile ClienteLogotipo)
         {
             clienteId = Id;
             clienteNome = ClienteNome;
             clienteEmail = ClienteEmail;
             clienteLogradouro = ClienteLogradouro;
-            clienteLogotipo = ClienteLogradouro;
+            clienteLogotipo = ClienteLogotipo.ToString();
         }
 
         [Key, Display(Name = "Id")]

@@ -1,0 +1,6 @@
+@CadastroCliente.Gateway_HostAddress = http://localhost:5067
+
+GET {{CadastroCliente.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

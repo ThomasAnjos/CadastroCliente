@@ -25,9 +25,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.clienteLogradouro)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.clienteLogotipo)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,9 +44,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.clienteLogradouro)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.clienteLogotipo)
-                </td>
+            
                 <td>
                     <a asp-action="ClienteAlterar" asp-route-id="@item.clienteId" class="btn btn-sm btn-success">
                         <i class="bi bi-pencil"></i>

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{846BFCE0-F428-42A9-80F9-04D4F28A8631}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroCliente.Api", "CadastroCliente.Api\CadastroCliente.Api.csproj", "{CA148052-B712-4A8E-B7B7-0F8880154CC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroCliente.Api", "CadastroCliente.Api\CadastroCliente.Api.csproj", "{CA148052-B712-4A8E-B7B7-0F8880154CC9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APP", "APP", "{354315D2-8147-46F9-B89E-77495E7CC0DC}"
 EndProject

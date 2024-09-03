@@ -18,12 +18,10 @@ namespace CadastroCliente.Application.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult LoginCliente()
         {
             return View();
         }
-
-        
 
         public IActionResult Cliente()
         {
