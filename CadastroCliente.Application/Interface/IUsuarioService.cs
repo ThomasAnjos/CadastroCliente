@@ -6,14 +6,14 @@ namespace CadastroCliente.Application.Interface
     {
         Task<List<ApplicationUsuario>> BuscaListaCompletaUsuario();
 
-        Task InsereDadosUsuario(ApplicationUsuario usuario);
+        Task<Uri> InsereDadosUsuario(ApplicationUsuario usuario);
 
-        Task AlteraDadosUsuario(ApplicationUsuario usuario);
+        Task<Uri> AlteraDadosUsuario(ApplicationUsuario usuario);
 
-        Task RemoveDadosUsuario(int id);
+        Task<Uri> RemoveDadosUsuario(int id);
 
         Task<ApplicationUsuario> BuscaUsuarioPorId(int id);
 
-        Task<ApplicationUsuario> BuscaUsuarioParaValidação(string email, string senha);
+        Task<ApplicationUsuario> BuscaUsuarioParaValidacao(string email, string senha);
     }
 }

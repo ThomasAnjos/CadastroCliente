@@ -2,6 +2,7 @@
 using CadastroCliente.Application.Models;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Text;
 
 namespace CadastroCliente.Application.Service
 {
@@ -19,68 +20,105 @@ namespace CadastroCliente.Application.Service
             _usuarios = usuarios;
             _usuario = usuario;
         }
-        public Task AlteraDadosUsuario(ApplicationUsuario usuario)
+        public async Task<Uri> AlteraDadosUsuario(ApplicationUsuario usuario)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                var usuarioAtualizar = new ApplicationUsuario
+                {
+                    UsuarioId = usuario.UsuarioId,
+                    UsuarioNome = "Encoder",
+                    UsuarioEmail = usuario.UsuarioEmail,
+                    UsuarioSenha = usuario.UsuarioSenha
+                };
+
+                string json = JsonConvert.SerializeObject(usuarioAtualizar);
+                client.BaseAddress = new System.Uri("https://localhost:44316/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                _response = await client.PutAsync("Usuario/Api/AlteraUsuarios", content);
+            }
+
+            return _response.Headers.Location;
         }
+
 
         public async Task<List<ApplicationUsuario>> BuscaListaCompletaUsuario()
         {
-            if (_httpClient.BaseAddress == null)
+            _httpClient.BaseAddress = new Uri("https://localhost:44316/");
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            ApplicationUsuario usuario = null;
+            HttpResponseMessage response = await _httpClient.GetAsync("Usuario/Api/BuscaTodosUsuarios");
+
+            if (response.IsSuccessStatusCode)
             {
-                _httpClient.BaseAddress = new Uri("https://viacep.com.br/ws/");
-                _httpClient.DefaultRequestHeaders.Accept.Clear();
-                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            }
-
-            string cep = string.Empty;
-
-            _response = await _httpClient.GetAsync($"{cep}/json/");
-
-            if (_response.IsSuccessStatusCode)
-            {
-                var json = await _response.Content.ReadAsStringAsync();
-                _usuarios = JsonConvert.DeserializeObject<List<ApplicationUsuario>>(json);
+                string responseContent = await response.Content.ReadAsStringAsync();
+                _usuarios = JsonConvert.DeserializeObject<List<ApplicationUsuario>>(responseContent);
             }
 
             return _usuarios;
         }
 
-        public async Task<ApplicationUsuario> BuscaUsuarioParaValidação(string email, string senha)
+        public async Task<ApplicationUsuario> BuscaUsuarioParaValidacao(string email, string senha)
         {
-            if (_httpClient.BaseAddress == null)
+            return null;
+        }
+
+        public async Task<ApplicationUsuario> BuscaUsuarioPorId(int Id)
+        {
+            string apiUrl = "https://localhost:44316/Usuario/Api/BuscaUsuarioPorId/" + Id; // Substitua "123" pelo ID desejado
+
+            ApplicationUsuario usuario = new ApplicationUsuario();
+
+            using (HttpClient client = new HttpClient())
             {
-                _httpClient.BaseAddress = new Uri("https://viacep.com.br/ws/");
-                _httpClient.DefaultRequestHeaders.Accept.Clear();
-                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                // Fazer a requisição GET
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                // Verificar se a requisição foi bem-sucedida
+                if (response.IsSuccessStatusCode)
+                {
+                    // Ler o conteúdo da resposta como string
+                    string result = await response.Content.ReadAsStringAsync();
+
+                    // Desserializar o JSON para o objeto Produto
+                    usuario = JsonConvert.DeserializeObject<ApplicationUsuario>(result);
+                }
             }
 
-            string cep = string.Empty;
+            return usuario;
+        }
 
-            _response = await _httpClient.GetAsync($"{cep}/json/");
-
-            if (_response.IsSuccessStatusCode)
+        public async Task<Uri> InsereDadosUsuario(ApplicationUsuario usuario)
+        {
+            using (var client = new HttpClient())
             {
-                var json = await _response.Content.ReadAsStringAsync();
-                _usuario = JsonConvert.DeserializeObject<ApplicationUsuario>(json);
+                client.BaseAddress = new System.Uri("https://localhost:44316/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var json = new ApplicationUsuario() { UsuarioNome = usuario.UsuarioNome, UsuarioEmail = usuario.UsuarioEmail, UsuarioSenha = usuario.UsuarioSenha };
+                _response = await client.PostAsJsonAsync("Usuario/Api/AdicionaUsuario", json);
             }
 
-            return _usuario;
+            return _response.Headers.Location;
         }
 
-        public Task<ApplicationUsuario> BuscaUsuarioPorId(int id)
+        public async Task<Uri> RemoveDadosUsuario(int id)
         {
-            throw new NotImplementedException();
-        }
+            string apiUrl = "https://localhost:44316/Usuario/Api/ApagarUsuario/" + id;
 
-        public async Task InsereDadosUsuario(ApplicationUsuario usuario)
-        {
-            throw new NotImplementedException();
-        }
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.DeleteAsync(apiUrl);
+            }
 
-        public Task RemoveDadosUsuario(int id)
-        {
-            throw new NotImplementedException();
+            return _response.Headers.Location;
         }
     }
 }

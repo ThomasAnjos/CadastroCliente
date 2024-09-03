@@ -4,56 +4,60 @@
     ViewData["Title"] = "Usuário";
 }
 
-<h1>Usuários</h1>
-
 <p>
-    <a asp-action="UsuarioCriar">Criar novo usuário</a>
+    <a method="post" asp-action="UsuarioCriar">Criar novo usuário</a>
 </p>
 <p>
-    <a asp-action="UsuarioAlterar">Alterar usuário</a>
+    <a method="post" asp-action="UsuarioAlterar">Alterar usuário</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.UsuarioId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.UsuarioNome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Senha)
+                @Html.DisplayNameFor(model => model.UsuarioEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioSenha)
             </th>
             <th></th>
         </tr>
     </thead>
-    @* <tbody>
+    <tbody>
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.usuarioNome)
+                    @Html.DisplayFor(modelItem => item.UsuarioId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.usuarioEmail)
+                    @Html.DisplayFor(modelItem => item.UsuarioNome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.usuarioSenha)
+                    @Html.DisplayFor(modelItem => item.UsuarioEmail)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-success">
+                    @Html.DisplayFor(modelItem => item.UsuarioSenha)
+                </td>
+                <td>
+                    <a asp-action="UsuarioAlterar" asp-route-id="@item.UsuarioId" class="btn btn-sm btn-success">
                         <i class="bi bi-pencil"></i>
                     </a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
+                    <a asp-action="Details" asp-route-id="@item.UsuarioId" class="btn btn-sm btn-primary">
                         <i class="bi bi-info-circle"></i>
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                    <a asp-action="ApagarUsuario" asp-route-id="@item.UsuarioId" class="btn btn-sm btn-danger">
                         <i class="bi bi-trash"></i>
                     </a>
                 </td>
             </tr>
         }
-    </tbody> *@
+    </tbody>
 </table>
 @if (ViewBag.MensagemDeErro != null)
 {

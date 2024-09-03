@@ -1,0 +1,39 @@
+﻿@model CadastroCliente.Application.Models.ApplicationCliente
+
+@{
+    ViewBag.Title = "Editar Cliente";
+}
+
+<h2>Editar Produto</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.clienteId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.clienteNome)
+        @Html.TextBoxFor(model => model.clienteNome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.clienteNome)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.clienteEmail)
+        @Html.TextBoxFor(model => model.clienteEmail, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.clienteEmail)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.clienteLogradouro)
+        @Html.TextAreaFor(model => model.clienteLogradouro, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.clienteLogradouro)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.clienteLogotipo)
+        @Html.TextAreaFor(model => model.clienteLogotipo, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.clienteLogotipo)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    @Html.ActionLink("Cancelar", "Cliente", null, new { @class = "btn btn-secondary" })
+}

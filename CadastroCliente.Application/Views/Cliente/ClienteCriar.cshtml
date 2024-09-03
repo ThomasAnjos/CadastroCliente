@@ -1,0 +1,50 @@
+﻿@model CadastroCliente.Application.Models.ApplicationCliente
+
+@{
+    ViewData["Title"] = "Novo Cliente";
+}
+
+<h1>Criar</h1>
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UsuarioCriar" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="clienteNome" class="control-label"></label>
+                <input asp-for="clienteNome" class="form-control" />
+                <span asp-validation-for="clienteNome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="clienteEmail" class="control-label"></label>
+                <input asp-for="clienteEmail" class="form-control" />
+                <span asp-validation-for="clienteEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="clienteLogradouro" class="control-label"></label>
+                <input asp-for="clienteLogradouro" class="form-control" />
+                <span asp-validation-for="clienteLogradouro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="clienteLogotipo" class="control-label"></label>
+                <input asp-for="clienteLogotipo" class="form-control" />
+                <span asp-validation-for="clienteLogotipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input formmethod="post" type="submit" value="UsuarioCriar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

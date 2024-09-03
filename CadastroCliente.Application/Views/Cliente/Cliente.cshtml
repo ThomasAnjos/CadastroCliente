@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CadastroCliente.Application.Models.ApplicationCliente>
+
+@{
+    ViewData["Title"] = "Cliente";
+}
+
+<p>
+    <a method="post" asp-action="ClienteCriar">Criar novo Cliente</a>
+</p>
+<p>
+    <a method="post" asp-action="ClienteAlterar">Alterar Cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.clienteId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clienteNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clienteEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clienteLogradouro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clienteLogotipo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clienteId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clienteNome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clienteEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clienteLogradouro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clienteLogotipo)
+                </td>
+                <td>
+                    <a asp-action="ClienteAlterar" asp-route-id="@item.clienteId" class="btn btn-sm btn-success">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.clienteId" class="btn btn-sm btn-primary">
+                        <i class="bi bi-info-circle"></i>
+                    </a>
+                    <a asp-action="ApagarCliente" asp-route-id="@item.clienteId" class="btn btn-sm btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (ViewBag.MensagemDeErro != null)
+{
+    <br />
+    <div class="alert alert-danger">
+        @ViewBag.MensagemDeErro
+    </div>
+}

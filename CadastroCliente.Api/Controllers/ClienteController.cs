@@ -16,8 +16,8 @@ namespace CadastroCliente.Api.Controllers
             _clienteService = clienteService;
         }
 
+        [Route("Api/AdicionaCliente")]
         [HttpPost]
-        [Route("AdicionaCliente")]
         public async Task<IActionResult> AdicionaCliente([FromBody] Cliente cliente)
         {
             await _clienteService.Adicionar(cliente);
@@ -26,7 +26,7 @@ namespace CadastroCliente.Api.Controllers
         }
 
         [HttpGet]
-        [Route("BuscaTodosClientes")]
+        [Route("Api/BuscaTodosClientes")]
         public async Task<IActionResult> BuscaTodosClientes()
         {
             var result = await _clienteService.ListaTodos();
@@ -35,7 +35,7 @@ namespace CadastroCliente.Api.Controllers
         }
 
         [HttpGet]
-        [Route("BuscaClientePorId/{Id?}")]
+        [Route("Api/BuscaClientePorId/{Id?}")]
         public async Task<IActionResult> BuscaClientePorId(int Id)
         {
             var result = await _clienteService.LeituraPorId(Id);
@@ -44,7 +44,7 @@ namespace CadastroCliente.Api.Controllers
         }
 
         [HttpPut]
-        [Route("AlteraCliente")]
+        [Route("Api/AlteraClientes")]
         public async Task<IActionResult> AlteraCliente([FromBody] Cliente usuario)
         {
             var result = await _clienteService.Alterar(usuario);
@@ -53,7 +53,7 @@ namespace CadastroCliente.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("ApagarCliente/{Id?}")]
+        [Route("Api/ApagarCliente/{Id?}")]
         public async Task<IActionResult> ApagarCliente(int Id)
         {
             var result = await _clienteService.Apagar(Id);

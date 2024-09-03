@@ -6,19 +6,20 @@ namespace CadastroCliente.Application.Models
     {
         public ApplicationUsuario() { }
 
-        public ApplicationUsuario(string UsuarioNome, string UsuarioEmail, string UsuarioSenha)
+        public ApplicationUsuario(int Id, string UsuarioNome, string UsuarioEmail, string UsuarioSenha)
         {
-            Nome = UsuarioNome;
-            Email = UsuarioEmail;
-            Senha = UsuarioSenha;
+            UsuarioNome = UsuarioNome;
+            UsuarioEmail = UsuarioEmail;
+            UsuarioSenha = UsuarioSenha;
+            UsuarioId = Id;
         }
 
         [Key, Display(Name = "Id")]
-        public int Id { get; set; }
+        public int UsuarioId { get; set; }
 
         private string _nome;
         [Required, StringLength(50), Display(Name = "Nome")]
-        public string Nome
+        public string UsuarioNome
         {
             get => _nome;
             set
@@ -36,7 +37,7 @@ namespace CadastroCliente.Application.Models
 
         private string _email;
         [Required, StringLength(50), Display(Name = "Email")]
-        public string Email
+        public string UsuarioEmail
         {
             get => _email;
             set
@@ -54,7 +55,7 @@ namespace CadastroCliente.Application.Models
 
         private string _senha;
         [Required, StringLength(30), Display(Name = "Senha")]
-        public string Senha
+        public string UsuarioSenha
         {
             get => _senha;
             set

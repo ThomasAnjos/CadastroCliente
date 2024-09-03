@@ -4,21 +4,21 @@ using CadastroCliente.Application.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<HttpResponseMessage>();
 builder.Services.AddScoped<List<ApplicationUsuario>>();
 builder.Services.AddScoped<ApplicationUsuario>();
+builder.Services.AddScoped<List<ApplicationCliente>>();
+builder.Services.AddScoped<ApplicationCliente>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

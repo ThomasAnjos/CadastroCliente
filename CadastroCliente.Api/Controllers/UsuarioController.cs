@@ -16,9 +16,9 @@ namespace CadastroCliente.Api.Controllers
             _usuarioService = usuarioService;
         }
 
+        [Route("Api/AdicionaUsuario")]
         [HttpPost]
-        [Route("AdicionaUsuario")]
-        public async Task<IActionResult> AdicionaUsuario([FromBody]Usuario usuario)
+        public async Task<IActionResult> AdicionaUsuario([FromBody] Usuario usuario)
         {
             await _usuarioService.Adicionar(usuario);
             return Ok();
@@ -26,7 +26,7 @@ namespace CadastroCliente.Api.Controllers
         }
 
         [HttpGet]
-        [Route("BuscaTodosUsuarios")]
+        [Route("Api/BuscaTodosUsuarios")]
         public async Task<IActionResult> BuscaTodosUsuarios()
         {
             var result = await _usuarioService.ListaTodos();
@@ -35,7 +35,7 @@ namespace CadastroCliente.Api.Controllers
         }
 
         [HttpGet]
-        [Route("BuscaUsuarioPorId/{Id?}")]
+        [Route("Api/BuscaUsuarioPorId/{Id?}")]
         public async Task<IActionResult> BuscaUsuarioPorId(int Id)
         {
             var result = await _usuarioService.LeituraPorId(Id);
@@ -44,8 +44,8 @@ namespace CadastroCliente.Api.Controllers
         }
 
         [HttpPut]
-        [Route("AlteraUsuario")]
-        public async Task<IActionResult> AlteraUsuario([FromBody] Usuario usuario)
+        [Route("Api/AlteraUsuarios")]
+        public async Task<IActionResult> AlteraUsuario(Usuario usuario)
         {
             var result = await _usuarioService.Alterar(usuario);
             return Ok(result);
@@ -53,7 +53,7 @@ namespace CadastroCliente.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("ApagarUsuario/{Id?}")]
+        [Route("Api/ApagarUsuario/{Id?}")]
         public async Task<IActionResult> ApagarUsuario(int Id)
         {
             var result = await _usuarioService.Apagar(Id);

@@ -1,5 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CadastroCliente.Application.Models.ApplicationUsuario
+
 @{
+    ViewBag.Title = "Editar Usuário";
+}
+
+<h2>Editar Produto</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.UsuarioId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UsuarioNome)
+        @Html.TextBoxFor(model => model.UsuarioNome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UsuarioNome)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UsuarioEmail)
+        @Html.TextBoxFor(model => model.UsuarioEmail, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UsuarioEmail)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UsuarioSenha)
+        @Html.TextAreaFor(model => model.UsuarioSenha, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UsuarioSenha)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    @Html.ActionLink("Cancelar", "Usuario", null, new { @class = "btn btn-secondary" })
 }
